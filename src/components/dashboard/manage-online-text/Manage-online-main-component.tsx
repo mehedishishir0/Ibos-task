@@ -24,7 +24,6 @@ const ManageOnlineMain = () => {
         </>
       )}
 
-      {/* STEP 2 */}
       {step === 2 && <AddQuestionModal />}
     </div>
   );

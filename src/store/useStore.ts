@@ -3,25 +3,28 @@ import type { FormData } from "@/types/Input-validation";
 
 type QuestionType = "checkbox" | "radio" | "text";
 
+export type Option = {
+  id: string;
+  label: string; 
+  text: string;
+  isCorrect: boolean;
+};
+
 export type Question = {
   id: string;
   type: QuestionType;
   score: number;
   question: string;
-  options?: {
-    label: string;
-    isCorrect: boolean;
-  }[];
+  options: Option[];
+  correctAnswer?: string;
 };
 
 type AppState = {
-  // STEP CONTROL
   step: 1 | 2;
   nextStep: () => void;
   prevStep: () => void;
   goToStep: (step: 1 | 2) => void;
 
-  // BASIC INFO
   basicInfo: (FormData & { duration: string }) | null;
   isBasicSubmitted: boolean;
   isEditMode: boolean;
@@ -30,13 +33,12 @@ type AppState = {
   resetBasicInfo: () => void;
   setEditMode: (value: boolean) => void;
 
-  // QUESTIONS
   questions: Question[];
   addQuestion: (q: Question) => void;
+  updateQuestion: (id: string, data: Partial<Question>) => void;
   removeQuestion: (id: string) => void;
   resetQuestions: () => void;
 
-  // FINAL GET ALL DATA
   getFullData: () => {
     basicInfo: AppState["basicInfo"];
     questions: Question[];
@@ -44,14 +46,12 @@ type AppState = {
 };
 
 export const useAppStore = create<AppState>((set, get) => ({
-  // STEP
   step: 1,
 
-  nextStep: () => set((state) => ({ step: state.step + 1 as 1 | 2 })),
-  prevStep: () => set((state) => ({ step: state.step - 1 as 1 | 2 })),
+  nextStep: () => set((s) => ({ step: (s.step + 1) as 1 | 2 })),
+  prevStep: () => set((s) => ({ step: (s.step - 1) as 1 | 2 })),
   goToStep: (step) => set({ step }),
 
-  // BASIC INFO
   basicInfo: null,
   isBasicSubmitted: false,
   isEditMode: false,
@@ -69,6 +69,7 @@ export const useAppStore = create<AppState>((set, get) => ({
       isBasicSubmitted: false,
       isEditMode: false,
       step: 1,
+      questions: [],
     }),
 
   setEditMode: (value) =>
@@ -77,12 +78,18 @@ export const useAppStore = create<AppState>((set, get) => ({
       isBasicSubmitted: !value,
     }),
 
-  // QUESTIONS
   questions: [],
 
   addQuestion: (q) =>
     set((state) => ({
       questions: [...state.questions, q],
+    })),
+
+  updateQuestion: (id, data) =>
+    set((state) => ({
+      questions: state.questions.map((q) =>
+        q.id === id ? { ...q, ...data } : q
+      ),
     })),
 
   removeQuestion: (id) =>
@@ -92,7 +99,6 @@ export const useAppStore = create<AppState>((set, get) => ({
 
   resetQuestions: () => set({ questions: [] }),
 
-  // FULL DATA EXPORT
   getFullData: () => ({
     basicInfo: get().basicInfo,
     questions: get().questions,

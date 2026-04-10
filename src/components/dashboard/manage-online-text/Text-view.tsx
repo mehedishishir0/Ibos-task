@@ -1,15 +1,22 @@
-import { Trash2 } from "lucide-react";
 import { EditorPlaceholder } from "./Editor-placeholder";
 
-export function TextView() {
+interface Props {
+  correctAnswer: string;
+  setCorrectAnswer: React.Dispatch<React.SetStateAction<string>>;
+}
+
+export function TextView({ correctAnswer, setCorrectAnswer }: Props) {
   return (
-    <div className="space-y-4">
-      <div className="space-y-2">
-        <div className="flex items-center justify-between">
-          <div className="h-6 w-6 rounded-full border flex items-center justify-center text-xs text-slate-400">A</div>
-          <Trash2 size={16} className="text-slate-300 cursor-pointer" />
-        </div>
-        <EditorPlaceholder />
+    <div className="space-y-6">
+      <div>
+        <p className="text-sm font-medium text-slate-600 mb-3">
+          Correct Answer (Exact or Expected Answer)
+        </p>
+        <EditorPlaceholder
+          label="Type the correct answer here..."
+          value={correctAnswer}
+          onChange={setCorrectAnswer}
+        />
       </div>
     </div>
   );
