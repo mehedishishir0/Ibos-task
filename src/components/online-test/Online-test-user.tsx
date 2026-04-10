@@ -3,18 +3,19 @@
 import { Search, ChevronLeft, ChevronRight, ChevronDown } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { OnlineTestCard } from "./Online-test-card";
+import { OnlineTestCard } from "./OnlineTestCard";
 import { useAllGetQuze } from "@/hooks/Apicalling";
-import Link from "next/link";
 
-export default function OnlineTestsMain() {
+export default function OnlineTestUser() {
   const { data } = useAllGetQuze();
 
-  const tests = data?.data?.map((item) => ({
+
+  const tests =  data?.data?.map((item) => ({
       title: item.title,
-      candidates: item.totalCandidates ?? "Not Set",
-      questionSets: item.totalQuestionSet ?? "Not Set",
-      examSlots: item.totalSlots ?? "Not Set",
+      duration: item.duration ? `${item.duration} min` : "Not Set",
+      question: item.questions?.length || 0,
+      negativeMarking: 0, 
+      id: item._id
     })) || [];
 
   return (
@@ -32,18 +33,16 @@ export default function OnlineTestsMain() {
             <Search size={18} className="text-purple-600" />
           </div>
         </div>
-
-      <Link href={"/dashboard/manage-online-test"}>
-        <Button className="bg-[#6633FF] hover:bg-[#5229d1] text-white py-6 px-8 rounded-xl text-md font-semibold">
-          Create Online Test
-        </Button>
-      </Link>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {tests.map((test, index) => (
-          <OnlineTestCard key={index} {...test} />
-        ))}
+        {tests.length > 0 ? (
+          tests.map((test, index: number) => (
+            <OnlineTestCard key={index} {...test} />
+          ))
+        ) : (
+          <p className="text-slate-500">No tests found</p>
+        )}
       </div>
 
       <div className="mt-10 flex items-center justify-between text-slate-500">
@@ -55,9 +54,11 @@ export default function OnlineTestsMain() {
           >
             <ChevronLeft size={16} />
           </Button>
+
           <span className="h-8 w-8 flex items-center justify-center bg-white shadow-sm border rounded text-sm font-medium">
             1
           </span>
+
           <Button
             variant="ghost"
             size="icon"

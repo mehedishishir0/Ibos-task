@@ -13,7 +13,6 @@ const ManageOnlineMain = () => {
     <div className="container mt-14 pb-40">
       <ManageTestHeader />
 
-      {/* STEP 1 */}
       {step === 1 && (
         <>
           {isBasicSubmitted && !isEditMode ? (

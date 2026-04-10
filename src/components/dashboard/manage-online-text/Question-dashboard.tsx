@@ -5,8 +5,9 @@ import { useAppStore } from "@/store/useStore";
 
 export default function QuestionDashboard() {
   const questions = useAppStore((state) => state.questions);
+
   return (
-    <div className="container mx-auto py-10 px-4">
+    <div className="container mx-auto py-5 px-4">
       {questions?.length === 0 ? (
         <p className="text-center text-slate-400">No questions added yet</p>
       ) : (

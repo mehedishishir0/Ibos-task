@@ -79,8 +79,8 @@ export function QuestionCard({
   };
 
   const handleRemove = () => {
-      removeQuestion(id);
-    };
+    removeQuestion(id);
+  };
 
   const displayAnswer = answer || correctAnswer || "";
 
@@ -176,13 +176,14 @@ export function QuestionCard({
               Edit
             </Button>
           )}
-        <DeleteConfirmModal onConfirm={handleRemove}>
-          <Button variant="ghost" className="text-red-500 hover:text-red-600">
-            Remove From Exam
-          </Button>
-        </DeleteConfirmModal>
+          <DeleteConfirmModal onConfirm={handleRemove}>
+            <Button variant="ghost" className="text-red-500 hover:text-red-600">
+              Remove From Exam
+            </Button>
+          </DeleteConfirmModal>
         </div>
       </CardContent>
+     
     </Card>
   );
 }

@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { useAppStore } from "@/store/useStore";
 import { Check } from "lucide-react";
+import Link from "next/link";
 
 export function ManageTestHeader() {
   const { step, basicInfo } = useAppStore();
@@ -68,12 +69,14 @@ export function ManageTestHeader() {
             </div>
           </div>
 
+        <Link href={"/dashboard"}>
           <Button
             variant="outline"
             className="border-slate-200 text-slate-600 rounded-lg hover:bg-slate-50"
           >
             Back to Dashboard
           </Button>
+        </Link>
         </div>
       </div>
     </Card>

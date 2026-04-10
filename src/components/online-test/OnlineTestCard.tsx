@@ -1,19 +1,22 @@
-import { Users, FileText, BookOpen } from "lucide-react";
+import { FileText, Clock1, CircleX } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 interface TestCardProps {
   title: string;
-  candidates: string | number;
-  questionSets: string | number;
-  examSlots: string | number;
+  duration: string | number;
+  question: string | number;
+  negativeMarking: string | number;
+  id:string | number
 }
 
 export function OnlineTestCard({
   title,
-  candidates,
-  questionSets,
-  examSlots,
+  duration,
+  question,
+  negativeMarking,
+  id
 }: TestCardProps) {
   return (
     <Card className="border border-[#E5E7EB] bg-[#FFFFFF] ring-0 rounded-xl px-[32px] pt-[32px] pb-[40px] ">
@@ -25,35 +28,37 @@ export function OnlineTestCard({
       <CardContent>
         <div className="flex items-center justify-between mb-8 text-sm text-slate-500">
           <div className="flex items-center gap-2">
-            <Users size={18} className="text-slate-400" />
+            <Clock1 size={18} className="text-slate-400" />
             <span>
-              Candidates:{" "}
-              <span className="font-semibold text-slate-700">{candidates}</span>
+              Duration:{" "}
+              <span className="font-semibold text-slate-700">{duration}</span>
             </span>
           </div>
           <div className="flex items-center gap-2">
             <FileText size={18} className="text-slate-400" />
             <span>
-              Question Set:{" "}
-              <span className="font-semibold text-slate-700">
-                {questionSets}
-              </span>
+              Question:{" "}
+              <span className="font-semibold text-slate-700">{question}</span>
             </span>
           </div>
           <div className="flex items-center gap-2">
-            <BookOpen size={18} className="text-slate-400" />
+            <CircleX size={18} className="text-slate-400" />
             <span>
-              Exam Slots:{" "}
-              <span className="font-semibold text-slate-700">{examSlots}</span>
+              Negative Marking:{" "}
+              <span className="font-semibold text-slate-700">
+                {negativeMarking}
+              </span>
             </span>
           </div>
         </div>
+       <Link href={`/${id}`}>
         <Button
           variant="outline"
           className="border-[#6633FF] text-purple-600 hover:bg-purple-50 hover:text-[#6633FF] rounded-lg px-6"
         >
-          View Candidates
+          Start
         </Button>
+       </Link>
       </CardContent>
     </Card>
   );
