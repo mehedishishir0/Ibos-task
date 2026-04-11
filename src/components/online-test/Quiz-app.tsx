@@ -3,7 +3,6 @@ import { useSingelGetQuze } from "@/hooks/Apicalling";
 import React, { useState, useEffect } from "react";
 import TimeoutModal from "./Timeout-modal";
 import { useRouter } from "next/navigation";
-import { toast } from "sonner";
 
 interface Option {
   text: string;
