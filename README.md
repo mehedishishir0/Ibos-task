@@ -84,6 +84,6 @@ Mongoose
 JWT Authentication
 
 
- Video : https://drive.google.com/file/d/1NyMYqEGdLrGMYqP9bntRT4rcRFcEmMHV/view?usp=sharing
+ Video : https://drive.google.com/file/d/1Mels6_rX1f8CH_QAZz66I3CPCtu6t8Y-/view?usp=sharing
 
 Live URL: https://ibos-frontend-task.vercel.app
