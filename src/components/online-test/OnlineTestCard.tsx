@@ -19,8 +19,8 @@ export function OnlineTestCard({
   id
 }: TestCardProps) {
   return (
-    <Card className="border border-[#E5E7EB] bg-[#FFFFFF] ring-0 rounded-xl px-[32px] pt-[32px] pb-[40px] ">
-      <CardHeader>
+    <Card className="border border-[#E5E7EB] bg-[#FFFFFF] ring-0 rounded-xl  p-6 ">
+      <CardHeader className="mb-3">
         <CardTitle className="text-[20px] font-semibold text-[#334155] leading-tight">
           {title}
         </CardTitle>
@@ -31,21 +31,21 @@ export function OnlineTestCard({
             <Clock1 size={18} className="text-slate-400" />
             <span>
               Duration:{" "}
-              <span className="font-semibold text-slate-700">{duration}</span>
+              <span className="font-semibold text-[#334155]">{duration}</span>
             </span>
           </div>
           <div className="flex items-center gap-2">
             <FileText size={18} className="text-slate-400" />
             <span>
               Question:{" "}
-              <span className="font-semibold text-slate-700">{question}</span>
+              <span className="font-semibold text-[#334155]">{question}</span>
             </span>
           </div>
           <div className="flex items-center gap-2">
             <CircleX size={18} className="text-slate-400" />
             <span>
               Negative Marking:{" "}
-              <span className="font-semibold text-slate-700">
+              <span className="font-semibold text-[#334155]">
                 {negativeMarking}
               </span>
             </span>
@@ -54,7 +54,7 @@ export function OnlineTestCard({
        <Link href={`/test/${id}`}>
         <Button
           variant="outline"
-          className="border-[#6633FF] text-purple-600 hover:bg-purple-50 hover:text-[#6633FF] rounded-lg px-6"
+          className="border-[#6633FF] text-[#6633FF] hover:bg-purple-50 hover:text-[#6633FF] rounded-lg px-8"
         >
           Start
         </Button>

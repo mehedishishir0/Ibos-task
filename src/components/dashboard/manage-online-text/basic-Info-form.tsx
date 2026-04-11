@@ -84,14 +84,14 @@ export default function BasicInformationForm() {
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <Card className="w-full p-8 ring-0 border-none shadow-sm rounded-2xl bg-white">
-          <h2 className="text-lg font-bold text-[#3E4756] mb-6">
+        <Card className="w-full p-6 ring-0 border-none shadow-sm rounded-2xl bg-white">
+          <h2 className="text-[18px] font-semibold text-[#3E4756] mb-5">
             Basic Information
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="md:col-span-2 space-y-2">
-              <Label className="text-sm font-semibold text-slate-700">
+            <div className="md:col-span-2 space-y-[10px]">
+              <Label className="text-sm font-semibold text-[#334155]">
                 Online Test Title <span className="text-red-500">*</span>
               </Label>
               <Controller
@@ -101,7 +101,7 @@ export default function BasicInformationForm() {
                   <Input
                     {...field}
                     placeholder="Enter online test title"
-                    className="h-14 text-sm border-slate-100"
+                    className="h-14 text-sm border-[#E5E7EB]"
                   />
                 )}
               />
@@ -110,8 +110,8 @@ export default function BasicInformationForm() {
               )}
             </div>
 
-            <div className="space-y-2">
-              <Label className="text-sm font-semibold text-slate-700">
+            <div className="space-y-[10px]">
+              <Label className="text-sm font-semibold text-[#334155]">
                 Total Candidates <span className="text-red-500">*</span>
               </Label>
               <Controller
@@ -122,7 +122,7 @@ export default function BasicInformationForm() {
                     {...field}
                     type="number"
                     placeholder="Enter total candidates"
-                    className="h-14 text-sm border-slate-100 "
+                    className="h-14 text-sm border-[#E5E7EB] "
                   />
                 )}
               />
@@ -133,8 +133,8 @@ export default function BasicInformationForm() {
               )}
             </div>
 
-            <div className="space-y-2">
-              <Label className="text-sm font-semibold text-slate-700">
+            <div className="space-y-[10px]">
+              <Label className="text-sm font-semibold text-[#334155]">
                 Total Slots <span className="text-red-500">*</span>
               </Label>
               <Controller
@@ -142,13 +142,13 @@ export default function BasicInformationForm() {
                 control={control}
                 render={({ field }) => (
                   <Select onValueChange={field.onChange}>
-                    <SelectTrigger className="py-6 border-slate-100 w-full text-slate-400">
+                    <SelectTrigger className="py-6 border-[#E5E7EB] w-full text-slate-400">
                       <SelectValue placeholder="Select total slots" />
                     </SelectTrigger>
                     <SelectContent className="bg-white text-sm">
-                      <SelectItem value="1">1</SelectItem>
-                      <SelectItem value="2">2</SelectItem>
-                      <SelectItem value="3">3</SelectItem>
+                      <SelectItem className="outline-none hover:bg-gray-100" value="1">1</SelectItem>
+                      <SelectItem className="outline-none hover:bg-gray-100" value="2">2</SelectItem>
+                      <SelectItem className="outline-none hover:bg-gray-100" value="3">3</SelectItem>
                     </SelectContent>
                   </Select>
                 )}
@@ -159,7 +159,7 @@ export default function BasicInformationForm() {
             </div>
 
             <div className="space-y-2">
-              <Label className="text-sm font-semibold text-slate-700">
+              <Label className="text-sm font-semibold text-[#334155]">
                 Total Question Set <span className="text-red-500">*</span>
               </Label>
               <Controller
@@ -167,11 +167,14 @@ export default function BasicInformationForm() {
                 control={control}
                 render={({ field }) => (
                   <Select onValueChange={field.onChange}>
-                    <SelectTrigger className="py-6 w-full border-slate-100  text-slate-400">
+                    <SelectTrigger className="py-6 w-full border-[#E5E7EB] ring-0  text-slate-400">
                       <SelectValue placeholder="Select total question set" />
                     </SelectTrigger>
-                    <SelectContent className="bg-white text-sm">
-                      <SelectItem value="set1">Set 1</SelectItem>
+                    <SelectContent className="bg-white ring-0  text-sm">
+                      <SelectItem className="outline-none hover:bg-gray-100" value="set1">Set 1</SelectItem>
+                      <SelectItem className="outline-none hover:bg-gray-100" value="set2">Set 2</SelectItem>
+                      <SelectItem className="outline-none hover:bg-gray-100" value="set3">Set 3</SelectItem>
+                      <SelectItem className="outline-none hover:bg-gray-100" value="set4">Set 4</SelectItem>
                     </SelectContent>
                   </Select>
                 )}
@@ -184,7 +187,7 @@ export default function BasicInformationForm() {
             </div>
 
             <div className="space-y-2">
-              <Label className="text-sm font-semibold text-slate-700">
+              <Label className="text-sm font-semibold text-[#334155]">
                 Question Type <span className="text-red-500">*</span>
               </Label>
               <Controller
@@ -196,8 +199,8 @@ export default function BasicInformationForm() {
                       <SelectValue placeholder="Select question type" />
                     </SelectTrigger>
                     <SelectContent className="bg-white text-sm">
-                      <SelectItem value="mcq">MCQ</SelectItem>
-                      <SelectItem value="qs">QS</SelectItem>
+                      <SelectItem className="outline-none hover:bg-gray-100" value="mcq">MCQ</SelectItem>
+                      <SelectItem className="outline-none hover:bg-gray-100" value="qs">QS</SelectItem>
                     </SelectContent>
                   </Select>
                 )}
@@ -210,7 +213,7 @@ export default function BasicInformationForm() {
             </div>
 
             <div className="space-y-2">
-              <Label className="text-sm font-semibold text-slate-700">
+              <Label className="text-sm font-semibold text-[#334155]">
                 Start Time <span className="text-red-500">*</span>
               </Label>
               <Controller
@@ -221,7 +224,7 @@ export default function BasicInformationForm() {
                     <Input
                       type="time"
                       {...field}
-                      className="h-14 border-slate-100 pr-10 appearance-none"
+                      className="h-14 border-[#E5E7EB] pr-10 appearance-none"
                     />
                   </div>
                 )}
@@ -234,7 +237,7 @@ export default function BasicInformationForm() {
             </div>
 
             <div className="space-y-2">
-              <Label className="text-sm font-semibold text-slate-700">
+              <Label className="text-sm font-semibold text-[#334155]">
                 End Time <span className="text-red-500">*</span>
               </Label>
               <Controller
@@ -245,7 +248,7 @@ export default function BasicInformationForm() {
                     <Input
                       type="time"
                       {...field}
-                      className="h-14 border-slate-100 pr-10 appearance-none"
+                      className="h-14 border-[#E5E7EB] pr-10 appearance-none"
                     />
                   </div>
                 )}
@@ -257,13 +260,14 @@ export default function BasicInformationForm() {
           </div>
 
           <div className="space-y-2 mt-4">
-            <Label className="text-sm font-semibold text-slate-700">
+            <Label className="text-sm font-semibold  text-[#334155]">
               Duration
             </Label>
             <Input
               value={duration}
+              placeholder="Duration Time"
               disabled
-              className="h-14 w-full border-slate-100 text-slate-400"
+              className="h-14 w-full border-[#E5E7EB] text-slate-400"
             />
           </div>
         </Card>
@@ -271,7 +275,7 @@ export default function BasicInformationForm() {
           <Button
             type="button"
             variant="outline"
-            className="h-14 px-12 border-slate-200 text-slate-600 rounded-xl font-semibold"
+            className=" px-16 h-12 border-slate-200 text-[#334155]  rounded-xl font-semibold"
           >
             Cancel
           </Button>

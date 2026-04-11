@@ -14,7 +14,7 @@ export function ManageTestHeader() {
   return (
     <Card className="w-full flex items-start ring-0 p-6 border-none shadow-sm rounded-xl bg-white mb-6">
       <div className="flex flex-col gap-6 w-full">
-        <h1 className="text-xl font-bold text-[#3E4756]">Manage Online Test</h1>
+        <h1 className="text-xl font-semibold text-[#334155]">Manage Online Test</h1>
 
         <div className="flex items-center justify-between gap-4">
           <div className="flex items-center gap-4">

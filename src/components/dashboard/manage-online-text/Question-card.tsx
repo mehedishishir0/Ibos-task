@@ -85,14 +85,18 @@ export function QuestionCard({
   const displayAnswer = answer || correctAnswer || "";
 
   return (
-    <Card className="w-full border-none shadow-sm rounded-2xl bg-white mb-6 overflow-hidden">
+    <Card className="w-full border-none ring-0 shadow-sm rounded-2xl bg-white mb-6 overflow-hidden">
       {/* HEADER */}
       <CardHeader className="flex flex-row items-center justify-between border-b px-8 py-4">
-        <span className="font-bold text-[#3E4756]">Question {number}</span>
+        <span className="font-semibold text-[#3E4756]">Question {number}</span>
 
         <div className="flex gap-2">
-          <Badge>{type}</Badge>
-          <Badge>{points} pt</Badge>
+          <Badge className="border border-[#E5E7EB] text-[#64748B] rounded-full p-3">
+            {type}
+          </Badge>
+          <Badge className="border border-[#E5E7EB]  text-[#64748B] rounded-full p-3">
+            {points} pt
+          </Badge>
         </div>
       </CardHeader>
 
@@ -105,7 +109,7 @@ export function QuestionCard({
           />
         ) : (
           <h3
-            className="text-[16px] font-bold text-[#3E4756] mb-6"
+            className="text-[16px] font-bold text-[#000000] mb-6"
             dangerouslySetInnerHTML={{ __html: question }}
           />
         )}
@@ -116,7 +120,7 @@ export function QuestionCard({
               <div
                 key={opt.id}
                 className={`flex my-4 items-center justify-between p-4 rounded-xl border ${
-                  opt.isCorrect ? "bg-slate-50" : ""
+                  opt.isCorrect ? "bg-[#F3F4F6]" : ""
                 }`}
               >
                 {isEditing ? (
@@ -154,7 +158,7 @@ export function QuestionCard({
             </div>
           ) : (
             <p
-              className="text-sm italic border-red-700  text-slate-500"
+              className=" border-red-700  text-slate-500"
               dangerouslySetInnerHTML={{
                 __html: displayAnswer,
               }}
@@ -183,7 +187,6 @@ export function QuestionCard({
           </DeleteConfirmModal>
         </div>
       </CardContent>
-     
     </Card>
   );
 }

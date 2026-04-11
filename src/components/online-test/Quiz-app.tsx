@@ -144,10 +144,10 @@ const QuizApp = ({ id }: { id: string }) => {
     return <div className="text-center p-10">Loading Quiz...</div>;
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-2 sm:p-4 bg-gray-50">
-      <div className="w-full max-w-2xl">
-        <div className="bg-white rounded-lg border border-[#E5E7EB] p-4 sm:p-6 mb-4 sm:mb-6 flex flex-row justify-between items-center shadow-sm">
-          <h2 className="text-[#334155] text-base sm:text-[20px] font-medium">
+    <div className="min-h-screen flex  justify-center p-2 sm:p-4 bg-gray-50">
+      <div className="w-full max-w-5xl mt-14">
+        <div className="bg-white rounded-2xl border border-[#E5E7EB] p-4 sm:p-6 mb-4 sm:mb-6 flex flex-row justify-between items-center ">
+          <h2 className="text-[#334155] sm:text-[20px] font-medium">
             Question ({currentIndex + 1}/{questions.length})
           </h2>
 
@@ -157,11 +157,11 @@ const QuizApp = ({ id }: { id: string }) => {
         </div>
 
         <div className="bg-white p-4 sm:p-6 rounded-t-lg border-t border-r border-l border-[#E5E7EB] min-h-[300px] sm:min-h-[350px]">
-     
-               <h1 className="text-[20px] font-semibold text-[#334155] mb-6">Q{currentIndex + 1}. {currentQuestion.question}</h1>
+          <h1 className="text-[20px] font-semibold text-[#334155] mb-6">
+            Q{currentIndex + 1}. {currentQuestion.question}
+          </h1>
 
           <div className="space-y-3 sm:space-y-4">
-            {/* radio type */}
             {currentQuestion.type === "radio" &&
               currentQuestion.options.map((opt) => (
                 <label
@@ -175,11 +175,12 @@ const QuizApp = ({ id }: { id: string }) => {
                     onChange={() => handleInputChange(opt._id)}
                     className="w-4 h-4 sm:w-5 sm:h-5 text-indigo-600 focus:ring-indigo-500"
                   />
-                  <div className="ml-3 text-sm sm:text-base text-gray-700">{opt.text} </div>
+                  <div className="ml-3 text-sm sm:text-base text-gray-700">
+                    {opt.text}{" "}
+                  </div>
                 </label>
               ))}
 
-            {/* checkbox type */}
             {currentQuestion.type === "checkbox" &&
               currentQuestion.options.map((opt) => (
                 <label
@@ -194,11 +195,12 @@ const QuizApp = ({ id }: { id: string }) => {
                     onChange={() => handleInputChange(opt._id)}
                     className="w-4 h-4 sm:w-5 sm:h-5 rounded text-indigo-600 focus:ring-indigo-500"
                   />
-                  <div className="ml-3 text-sm sm:text-base text-gray-700">{opt.text}</div>
+                  <div className="ml-3 text-sm sm:text-base text-[#334155]">
+                    {opt.text}
+                  </div>
                 </label>
               ))}
 
-            {/* text type */}
             {currentQuestion.type === "text" && (
               <div className="border border-gray-200 rounded-xl overflow-hidden focus-within:ring-2 focus-within:ring-indigo-500">
                 <textarea
@@ -218,13 +220,19 @@ const QuizApp = ({ id }: { id: string }) => {
           </div>
         </div>
 
-        <div className="bg-white rounded-b-lg border border-[#E5E7EB] p-4 sm:p-6 flex flex-col sm:flex-row gap-3 sm:justify-between sm:items-center shadow-sm">
+        <div className="bg-white rounded-b-lg border-t-0 border-r border-l border-b border-[#E5E7EB] p-4 sm:p-6 flex flex-col sm:flex-row gap-3 sm:justify-between sm:items-center shadow-sm">
           <button
             type="button"
             className="order-2 sm:order-1 text-[#334155] font-semibold border border-[#E5E7EB] p-2.5 sm:p-3 rounded-xl hover:bg-gray-50 transition text-sm sm:text-base"
-            onClick={() =>
-              currentIndex > 0 ? setCurrentIndex(currentIndex - 1) : null
-            }
+            onClick={() => {
+              if (currentIndex === 0) {
+                if (currentIndex < questions.length - 1) {
+                  setCurrentIndex(currentIndex + 1);
+                }
+              } else {
+                setCurrentIndex(currentIndex - 1);
+              }
+            }}
           >
             {currentIndex === 0 ? "Skip this Question" : "Previous"}
           </button>

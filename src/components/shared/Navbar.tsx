@@ -15,7 +15,7 @@ import { ChevronDown, LogOut, Settings, User } from "lucide-react";
 import { signOut, useSession } from "next-auth/react";
 import { useLogout } from "@/hooks/Apicalling";
 
-export function Navbar() {
+export function Navbar({title}:{title:string}) {
   const session = useSession();
   const token = (session?.data?.user as { accessToken: string })?.accessToken;
   const user = session?.data?.user as { fullName: string };
@@ -28,24 +28,27 @@ export function Navbar() {
   };
 
   return (
-    <header className="shadow-[0px_2.71px_4.4px_0px_#C0C0C007,0px_6.86px_11.12px_0px_#C0C0C00A,0px_14px_22.68px_0px_#C0C0C00C,0px_28.84px_46.72px_0px_#C0C0C00F,0px_79px_128px_0px_#C0C0C017] h-16 w-full  bg-white px-6 ">
+    <header className="shadow-[0px_2.71px_4.4px_0px_#C0C0C007,0px_6.86px_11.12px_0px_#C0C0C00A,0px_14px_22.68px_0px_#C0C0C00C,0px_28.84px_46.72px_0px_#C0C0C00F,0px_79px_128px_0px_#C0C0C017] py-6 w-full  bg-white ">
       <div className="container mx-auto flex items-center h-full justify-between">
         <div className="flex items-center gap-2">
           <Link href={"/"}>
-            <div className="flex  gap-20">
-              <Image
-                src="/images/Logo.png"
-                width={100}
-                height={100}
-                alt="logo"
-              />
+            <div className="flex gap-20 items-center ">
+              <div>
+                <Image
+                  className="w-28 h-8"
+                  src="/images/Logo.png"
+                  width={900}
+                  height={900}
+                  alt="logo"
+                />
+              </div>
               <p className="text-[#130B2C] font-sans text-[16px]">
-                Online Test
+              {title}
               </p>
             </div>
           </Link>
         </div>
-        <div className="flex items-center justify-end p-4">
+        <div className="flex items-center justify-end">
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <div className="flex items-center gap-3 cursor-pointer hover:opacity-80 transition-opacity outline-none">

@@ -6,26 +6,36 @@ import { Button } from "@/components/ui/button";
 import { OnlineTestCard } from "./Online-test-card";
 import { useAllGetQuze } from "@/hooks/Apicalling";
 import Link from "next/link";
+import { EmptyTestState } from "./Empty-test-state";
+import { useState } from "react";
 
 export default function OnlineTestsMain() {
   const { data } = useAllGetQuze();
+  const [searchTerm, setSearchTerm] = useState("");
 
-  const tests = data?.data?.map((item) => ({
+  const tests =
+    data?.data?.map((item) => ({
       title: item.title,
       candidates: item.totalCandidates ?? "Not Set",
       questionSets: item.totalQuestionSet ?? "Not Set",
       examSlots: item.totalSlots ?? "Not Set",
     })) || [];
 
+  const filteredTests = tests.filter((test) =>
+    test.title.toLowerCase().includes(searchTerm.toLowerCase()),
+  );
+
   return (
     <div className="min-h-screen container p-8 mt-12">
       <div className=" flex flex-col md:flex-row items-center justify-between gap-4 mb-8">
         <h1 className="text-2xl font-bold text-[#3E4756]">Online Tests</h1>
 
-        <div className="relative w-full max-w-lg">
+        <div className="relative w-full max-w-2xl">
           <Input
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
             placeholder="Search by exam title"
-            className="pl-4 pr-12 py-6 border border-purple-100 rounded-xl shadow-sm focus-visible:ring-2 focus-visible:ring-purple-400 focus-visible:outline-none"
+            className="pl-4 pr-12 py-6 border border-purple-100 rounded-xl "
           />
 
           <div className="absolute right-2 top-1/2 -translate-y-1/2 bg-[#673FED1A] rounded-full p-2 flex items-center justify-center">
@@ -33,15 +43,16 @@ export default function OnlineTestsMain() {
           </div>
         </div>
 
-      <Link href={"/dashboard/manage-online-test"}>
-        <Button className="bg-[#6633FF] hover:bg-[#5229d1] text-white py-6 px-8 rounded-xl text-md font-semibold">
-          Create Online Test
-        </Button>
-      </Link>
+        <Link href={"/dashboard/manage-online-test"}>
+          <Button className="bg-[#6633FF] hover:bg-[#5229d1] text-white py-6 px-8 rounded-xl text-[16px] font-semibold">
+            Create Online Test
+          </Button>
+        </Link>
       </div>
+      {filteredTests.length === 0 && <EmptyTestState />}
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {tests.map((test, index) => (
+        {filteredTests.map((test, index) => (
           <OnlineTestCard key={index} {...test} />
         ))}
       </div>

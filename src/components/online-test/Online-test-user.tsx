@@ -5,27 +5,34 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { OnlineTestCard } from "./OnlineTestCard";
 import { useAllGetQuze } from "@/hooks/Apicalling";
+import { useState } from "react";
 
 export default function OnlineTestUser() {
   const { data } = useAllGetQuze();
+  const [searchTerm, setSearchTerm] = useState("");
 
-
-
-  const tests =  data?.data?.map((item) => ({
+  const tests =
+    data?.data?.map((item) => ({
       title: item.title,
       duration: item.duration ? `${item.duration} min` : "Not Set",
       question: item.questions?.length || 0,
-      negativeMarking: 0, 
-      id: item._id
+      negativeMarking: 0,
+      id: item._id,
     })) || [];
+
+  const filteredTests = tests.filter((test) =>
+    test.title.toLowerCase().includes(searchTerm.toLowerCase()),
+  );
 
   return (
     <div className="min-h-screen container p-8 mt-12">
       <div className=" flex flex-col md:flex-row items-center justify-between gap-4 mb-8">
-        <h1 className="text-2xl font-bold text-[#3E4756]">Online Tests</h1>
+        <h1 className="text-2xl font-semibold text-[#334155]">Online Tests</h1>
 
         <div className="relative w-full max-w-lg">
           <Input
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
             placeholder="Search by exam title"
             className="pl-4 pr-12 py-6 border border-purple-100 rounded-xl shadow-sm focus-visible:ring-2 focus-visible:ring-purple-400 focus-visible:outline-none"
           />
@@ -37,7 +44,7 @@ export default function OnlineTestUser() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {tests.length > 0 ? (
+        {filteredTests.length > 0 ? (
           tests.map((test, index: number) => (
             <OnlineTestCard key={index} {...test} />
           ))

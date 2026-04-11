@@ -24,7 +24,7 @@ export function useCreateQuze(token: string, onSuccessCallback?: () => void) {
 
 export function useUpdateQuze(token: string, onSuccessCallback?: () => void) {
   return useMutation({
-    mutationFn: (data: CreateQuzePayload) => updateQuze(token, data),
+    mutationFn: ({ data, id }: { data: CreateQuzePayload; id: string }) => updateQuze(token, data, id),
 
     onSuccess: (data) => {
       toast.success(data.message || "Quze update successfully!");

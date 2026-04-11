@@ -62,20 +62,20 @@ const LoginForm = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center py-20">
+    <div className="flex flex-col items-center justify-center px-4 md:px-0 py-20 ">
       <h2 className="mb-6 text-2xl font-bold text-[#334155]">Sign In</h2>
 
-      <Card className="w-full max-w-xl border border-[#E5E7EB] bg-white rounded-2xl">
+      <Card className="w-full max-w-xl border ring-0  border-[#E5E7EB] bg-white rounded-2xl">
         <CardHeader />
         <CardContent className="p-8">
           <form onSubmit={handleSubmit(onSubmit)} className="grid gap-6">
-            {/* Email Field */}
-            <div className="grid gap-2">
+      
+            <div className="grid gap-3">
               <Label
                 htmlFor="email"
-                className="text-sm font-medium text-slate-600"
+                className="text-sm font-medium text-[#334155]"
               >
-                Email / User ID
+                Email
               </Label>
               <Controller
                 name="email"
@@ -85,7 +85,7 @@ const LoginForm = () => {
                     {...field}
                     id="email"
                     type="text"
-                    placeholder="Enter your email/User ID"
+                    placeholder="Enter your email"
                     className="h-12 border-[#D1D5DB]"
                   />
                 )}
@@ -95,11 +95,10 @@ const LoginForm = () => {
               )}
             </div>
 
-            {/* Password Field */}
-            <div className="grid gap-2">
+          <div className="grid gap-3">
               <Label
                 htmlFor="password"
-                className="text-sm font-medium text-slate-600"
+               className="text-sm font-medium text-[#334155]"
               >
                 Password
               </Label>
@@ -134,8 +133,6 @@ const LoginForm = () => {
                   {errors.password.message}
                 </p>
               )}
-
-              {/* Forgot Password */}
               <div className="flex justify-end">
                 <button
                   type="button"
@@ -146,8 +143,6 @@ const LoginForm = () => {
                 </button>
               </div>
             </div>
-
-            {/* Submit Button */}
             <Button
               type="submit"
               disabled={isLoading}

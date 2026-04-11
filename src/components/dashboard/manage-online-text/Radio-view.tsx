@@ -1,6 +1,6 @@
 "use client";
 
-import { Trash2 } from "lucide-react";
+import { Plus, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { EditorPlaceholder } from "./Editor-placeholder";
 
@@ -91,7 +91,7 @@ export function RadioView({ options, setOptions }: Props) {
         onClick={addOption}
         className="text-[#6333FF] hover:text-[#5229d1] font-semibold p-0 h-auto text-sm"
       >
-        + Another Option
+         <Plus className="text-[#6333FF]" /> Another Option
       </Button>
     </div>
   );

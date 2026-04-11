@@ -16,8 +16,6 @@ export async function createQuze(token: string, data: CreateQuzePayload) {
 
   const today = new Date().toISOString().split("T")[0];
 
-  console.log(data)
-
   const payload = {
     title: data?.basicInfo?.title,
     totalCandidates: Number(data?.basicInfo?.candidates),
@@ -70,7 +68,7 @@ export async function createQuze(token: string, data: CreateQuzePayload) {
 }
 
 
-export async function updateQuze(token: string, data: CreateQuzePayload) {
+export async function updateQuze(token: string, data: CreateQuzePayload, id:string) {
   const durationToMinutes = (duration: string | undefined) => {
     if (!duration) return 0;
     const match = duration.match(/(\d+)h\s*(\d+)m/);
@@ -94,27 +92,27 @@ export async function updateQuze(token: string, data: CreateQuzePayload) {
     duration: durationToMinutes(data?.basicInfo?.duration),
 
     questions: data.questions1.map((q) => ({
-      question: q.question,
+      question: q.question.replace(/<[^>]*>/g, ""),
       type: q.type,
       score: q.score,
 
       options:
         q.type !== "text"
           ? q.options.map((opt) => ({
-              text: opt.text,
+              text: opt.text.replace(/<[^>]*>/g, ""),
               isCorrect: opt.isCorrect,
             }))
           : [],
 
       textAnswer:
         q.type === "text"
-          ? q.correctAnswer
+          ? q.correctAnswer?.replace(/<[^>]*>/g, "")
           : undefined,
     })),
   };
 
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_BACKEND_URL}/quze/update`,
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/quze/update/${id}`,
     {
       method: "PUT",
       headers: {
@@ -136,7 +134,6 @@ export async function updateQuze(token: string, data: CreateQuzePayload) {
 export async function getAllQuze() {
   const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/quze/get`, {
     headers: {
-    //   Authorization: `Bearer ${token}`,
       "Content-Type": "application/json",
     },
   });

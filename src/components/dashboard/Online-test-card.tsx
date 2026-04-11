@@ -18,7 +18,7 @@ export function OnlineTestCard({
   return (
     <Card className="border border-[#E5E7EB] bg-[#FFFFFF] ring-0 rounded-xl px-[32px] pt-[32px] pb-[40px] ">
       <CardHeader>
-        <CardTitle className="text-[20px] font-semibold text-[#334155] leading-tight">
+        <CardTitle className="text-[20px] mb-5 font-semibold text-[#334155] leading-tight">
           {title}
         </CardTitle>
       </CardHeader>
@@ -50,7 +50,7 @@ export function OnlineTestCard({
         </div>
         <Button
           variant="outline"
-          className="border-[#6633FF] text-purple-600 hover:bg-purple-50 hover:text-[#6633FF] rounded-lg px-6"
+          className="border-[#6633FF] text-[#6633FF] hover:bg-purple-50 hover:text-[#6633FF] rounded-lg py-5 px-6"
         >
           View Candidates
         </Button>
