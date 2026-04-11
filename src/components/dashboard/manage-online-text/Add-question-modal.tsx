@@ -232,7 +232,7 @@ export function AddQuestionModal() {
             </div>
 
             <div className="flex justify-end gap-3 mt-10 pt-6 border-t">
-              {questions.length > 0 ? (
+              {questions.length > 0 && id ? (
                 <Button
                   onClick={() => {
                     handleSave(false);
