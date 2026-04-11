@@ -3,6 +3,7 @@ import { useSingelGetQuze } from "@/hooks/Apicalling";
 import React, { useState, useEffect } from "react";
 import TimeoutModal from "./Timeout-modal";
 import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 interface Option {
   text: string;
@@ -139,6 +140,22 @@ const QuizApp = ({ id }: { id: string }) => {
       router.push("/test-completed");
     }
   };
+
+
+  useEffect(() => {
+  const handleVisibilityChange = () => {
+    if (document.hidden) {
+      alert("Tab switch not allowed");
+    }
+  };
+  document.addEventListener("visibilitychange", handleVisibilityChange);
+
+  return () => {
+    document.removeEventListener("visibilitychange", handleVisibilityChange);
+  };
+}, []);
+
+
 
   if (isLoading || !quizData)
     return <div className="text-center p-10">Loading Quiz...</div>;
