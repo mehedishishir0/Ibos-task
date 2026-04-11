@@ -50,9 +50,9 @@ const LoginForm = () => {
         toast.error("Incorrect email or password");
         return;
       }
-
       toast.success("Login successful!");
-      router.push("/");
+      window.location.href = "/";
+      
     } catch (error) {
       console.error("Login error:", error);
       toast.error("Something went wrong. Please try again.");
@@ -69,7 +69,6 @@ const LoginForm = () => {
         <CardHeader />
         <CardContent className="p-8">
           <form onSubmit={handleSubmit(onSubmit)} className="grid gap-6">
-      
             <div className="grid gap-3">
               <Label
                 htmlFor="email"
@@ -95,10 +94,10 @@ const LoginForm = () => {
               )}
             </div>
 
-          <div className="grid gap-3">
+            <div className="grid gap-3">
               <Label
                 htmlFor="password"
-               className="text-sm font-medium text-[#334155]"
+                className="text-sm font-medium text-[#334155]"
               >
                 Password
               </Label>
