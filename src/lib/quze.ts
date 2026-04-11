@@ -1,16 +1,22 @@
 import { CreateQuzePayload } from "@/types/quzeDataType";
 
 export async function createQuze(token: string, data: CreateQuzePayload) {
-  const durationToMinutes = (duration: string | undefined) => {
-    if (!duration) return 0;
-    const match = duration.match(/(\d+)h\s*(\d+)m/);
-    if (!match) return 0;
-    const hours = Number(match[1]);
-    const minutes = Number(match[2]);
-    return hours * 60 + minutes;
-  };
+ 
+ const durationToMinutes = (duration: string | undefined) => {
+  if (!duration) return 0;
+
+  const hourMatch = duration.match(/(\d+)h/);
+  const minuteMatch = duration.match(/(\d+)m/);
+
+  const hours = hourMatch ? Number(hourMatch[1]) : 0;
+  const minutes = minuteMatch ? Number(minuteMatch[1]) : 0;
+
+  return hours * 60 + minutes;
+};
 
   const today = new Date().toISOString().split("T")[0];
+
+  console.log(data)
 
   const payload = {
     title: data?.basicInfo?.title,
@@ -20,25 +26,26 @@ export async function createQuze(token: string, data: CreateQuzePayload) {
 
     startTime: new Date(`${today}T${data?.basicInfo?.startTime}:00`),
     endTime: new Date(`${today}T${data?.basicInfo?.endTime}:00`),
+    
 
     duration: durationToMinutes(data?.basicInfo?.duration),
 
     questions: data.questions1.map((q) => ({
-      question: q.question,
+      question: q.question.replace(/<[^>]*>/g, ""),
       type: q.type,
       score: q.score,
 
       options:
         q.type !== "text"
           ? q.options.map((opt) => ({
-              text: opt.text,
+              text: opt.text.replace(/<[^>]*>/g, ""),
               isCorrect: opt.isCorrect,
             }))
           : [],
 
       textAnswer:
         q.type === "text"
-          ? q.correctAnswer
+           ? q.correctAnswer?.replace(/<[^>]*>/g, "")
           : undefined,
     })),
   };

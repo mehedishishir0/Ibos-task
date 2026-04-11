@@ -10,7 +10,7 @@ type PageProps = {
 
 const page = ({ params }: PageProps)  => {
   return (
-    <div>
+    <div className='pb-60 md:pb-0'>
         <QuizApp id={params.id}/>
     </div>
   )

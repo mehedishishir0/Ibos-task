@@ -1,3 +1,4 @@
+import { logout } from "@/lib/auth";
 import { createQuze, getAllQuze, getSingelQuze, updateQuze } from "@/lib/quze";
 import { CreateQuzePayload } from "@/types/quzeDataType";
 import { ApiResponse, SingelApiResponse } from "@/types/quzeGetDataType";
@@ -53,6 +54,24 @@ export function useSingelGetQuze(id:string) {
     queryKey: ["singel-quze"],
     queryFn: () => {
       return getSingelQuze(id);
+    },
+  });
+}
+
+
+export function useLogout(token:string, onSuccessCallback?: () => void) {  
+  return useMutation({ mutationFn: () => logout(token),
+   
+    onSuccess: (data) => {
+      toast.success(data?.message || "Logout  successfully");
+      
+      if (onSuccessCallback) onSuccessCallback();
+    
+    },
+    onError: (error: unknown) => {
+      if (error instanceof Error)
+        toast.error(error.message || "logout failed");
+      else toast.error("logout failed");
     },
   });
 }

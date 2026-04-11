@@ -51,7 +51,7 @@ export function OnlineTestCard({
             </span>
           </div>
         </div>
-       <Link href={`/${id}`}>
+       <Link href={`/test/${id}`}>
         <Button
           variant="outline"
           className="border-[#6633FF] text-purple-600 hover:bg-purple-50 hover:text-[#6633FF] rounded-lg px-6"
