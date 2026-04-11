@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { OnlineTestCard } from "./OnlineTestCard";
 import { useAllGetQuze } from "@/hooks/Apicalling";
 import { useState } from "react";
+import { EmptyTestState } from "../dashboard/Empty-test-state";
 
 export default function OnlineTestUser() {
   const { data } = useAllGetQuze();
@@ -43,14 +44,13 @@ export default function OnlineTestUser() {
         </div>
       </div>
 
+      {filteredTests.length === 0 && <EmptyTestState />}
+
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {filteredTests.length > 0 ? (
-          tests.map((test, index: number) => (
+         {filteredTests.map((test, index: number) => (
             <OnlineTestCard key={index} {...test} />
           ))
-        ) : (
-          <p className="text-slate-500">No tests found</p>
-        )}
+        }
       </div>
 
       <div className="mt-10 flex items-center justify-between text-slate-500">
