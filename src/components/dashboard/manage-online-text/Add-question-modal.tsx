@@ -238,7 +238,7 @@ export function AddQuestionModal() {
                     handleSave(false);
                     submiteData("update");
                   }}
-                  className="px-10  text-white hover:bg-[#5229d1]"
+                  className="px-16 py-5 border border-[#6633FF] hover:text-white text-[#6633FF] hover:bg-[#5229d1]"
                 >
                   Save
                 </Button>
